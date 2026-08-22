@@ -1,14 +1,14 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net;
-using Newtonsoft.Json;
 
 namespace SnipeSharp.Exceptions
 {
     /// <summary>
     /// The exception that is thrown when the SnipeIT Api returns a non-success <see cref="System.Net.HttpStatusCode">HttpStatusCode</see> or a successful HTTP status, but an API error status.
     /// </summary>
-    public sealed class ApiErrorException: Exception
+    public sealed class ApiErrorException : Exception
     {
         /// <summary>
         /// If the HTTP request was not successful, then true, else false.
@@ -30,7 +30,7 @@ namespace SnipeSharp.Exceptions
         /// </summary>
         /// <param name="errorCode">The HttpStatusCode of the failed request</param>
         /// <param name="message">The response content or other message, if any.</param>
-        public ApiErrorException(HttpStatusCode errorCode, string message): base(message ?? errorCode.ToString())
+        public ApiErrorException(HttpStatusCode errorCode, string message) : base(message ?? errorCode.ToString())
         {
             IsHttpError = true;
             HttpStatusCode = errorCode;
@@ -40,7 +40,7 @@ namespace SnipeSharp.Exceptions
         /// Initializes a new instance of the ApiErrorException class with a specified message.
         /// </summary>
         /// <param name="message">The message, if any.</param>
-        public ApiErrorException(string message): base(message)
+        public ApiErrorException(string message) : base(message)
         {
             IsHttpError = false;
         }
@@ -57,13 +57,14 @@ namespace SnipeSharp.Exceptions
         /// <inheritdoc />
         public override string ToString()
         {
-            if(IsHttpError)
+            if (IsHttpError)
             {
                 var message = Message;
-                if(message.Length > 80)
-                    message = $"{message.Substring(0,77)}...";
+                if (message.Length > 80)
+                    message = $"{message.Substring(0, 77)}...";
                 return $"{HttpStatusCode}: {message}";
-            } else
+            }
+            else
             {
                 return base.ToString();
             }

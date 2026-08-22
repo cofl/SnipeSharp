@@ -4,7 +4,7 @@ namespace SnipeSharp.Filters
     /// The typed search filter interface, for filtering collections in the API and sorting the based on a column.
     /// </summary>
     /// <typeparam name="T">The sort column type; for example, an enumeration, or a string.</typeparam>
-    public interface ISortableSearchFilter<T>: ISearchFilter
+    public interface ISortableSearchFilter<T> : ISearchFilter
     {
         /// <summary>
         /// The column to sort on.

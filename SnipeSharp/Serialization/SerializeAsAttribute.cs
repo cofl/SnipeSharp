@@ -12,7 +12,7 @@ namespace SnipeSharp.Serialization
 
         internal SerializeAsAttribute(string key, SerializeAs serializationType = SerializeAs.Default)
         {
-            if(string.IsNullOrEmpty(key))
+            if (string.IsNullOrEmpty(key))
                 throw new ArgumentException("Key cannot be null or empty.", paramName: nameof(key));
             Key = key;
             SerializeAs = serializationType;
@@ -27,6 +27,8 @@ namespace SnipeSharp.Serialization
         Default = 0,
 
         SimpleDate,
+
+        SimpleDateOnly,
 
         Timespan,
 

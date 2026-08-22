@@ -1,7 +1,7 @@
-using System.Collections.Generic;
+using Newtonsoft.Json;
 using SnipeSharp.Serialization;
 using System.Collections;
-using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace SnipeSharp.Models
 {
@@ -11,7 +11,7 @@ namespace SnipeSharp.Models
     /// <typeparam name="T">The type of elements in this collection.</typeparam>
     [JsonObject]
     public sealed class ResponseCollection<T> : ApiObject, IList<T>, IReadOnlyList<T>, ICollection<T>, IReadOnlyCollection<T>
-        where T: ApiObject
+        where T : ApiObject
     {
         /// <value>The total number of objects available from the endpoint for whatever filters were applied.</value>
         /// <remarks>This value may not be the same as <see cref="Count"/>.</remarks>
@@ -33,7 +33,7 @@ namespace SnipeSharp.Models
         public int Count => Rows?.Count ?? 0;
 
         /// <inheritdoc />
-        public bool IsReadOnly => ((IList<T>) Rows).IsReadOnly;
+        public bool IsReadOnly => ((IList<T>)Rows).IsReadOnly;
 
         /// <inheritdoc />
         public void Add(T item)

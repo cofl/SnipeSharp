@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using SnipeSharp.Models.Enumerations;
 
 namespace SnipeSharp.Models

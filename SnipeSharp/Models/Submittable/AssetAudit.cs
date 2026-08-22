@@ -1,6 +1,6 @@
-using System;
 using SnipeSharp.EndPoint;
 using SnipeSharp.Serialization;
+using System;
 
 namespace SnipeSharp.Models
 {

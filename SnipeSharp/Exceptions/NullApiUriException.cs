@@ -11,7 +11,7 @@ namespace SnipeSharp.Exceptions
         /// <summary>
         /// Initializes a new instance of the NullApiUriException class.
         /// </summary>
-        public NullApiUriException(): base("No API Uri set.")
+        public NullApiUriException() : base("No API Uri set.")
         {
         }
     }

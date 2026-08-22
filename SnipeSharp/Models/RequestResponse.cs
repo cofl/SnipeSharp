@@ -1,8 +1,8 @@
-using System.Collections.Generic;
-using SnipeSharp.Serialization;
-using System.Linq;
-using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using SnipeSharp.Serialization;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 
 namespace SnipeSharp.Models
@@ -11,7 +11,7 @@ namespace SnipeSharp.Models
     /// A response from the API, which may indicate success or error, have messages, and possibly have a payload.
     /// </summary>
     /// <typeparam name="T">The payload type.</typeparam>
-    public sealed class RequestResponse<T>: ApiObject where T: ApiObject
+    public sealed class RequestResponse<T> : ApiObject where T : ApiObject
     {
         /// <value>Any messages returned by the API; the default key is "general".</value>
         //[DeserializeAs("messages", DeserializeAs.MessageDictionary)]
@@ -31,15 +31,16 @@ namespace SnipeSharp.Models
         [OnDeserialized]
         private void OnDeserialized(StreamingContext context)
         {
-            if(null == extensionData)
+            if (null == extensionData)
                 return;
-            if(extensionData.TryGetValue("messages", out var token))
+            if (extensionData.TryGetValue("messages", out var token))
             {
-                if(JTokenType.String == token.Type)
+                if (JTokenType.String == token.Type)
                     Messages = new Dictionary<string, string> { ["general"] = token.ToObject<string>() };
                 else
                     Messages = token.ToObject<Dictionary<string, string>>();
-            } else
+            }
+            else
             {
                 Messages = new Dictionary<string, string>();
             }

@@ -71,6 +71,9 @@ namespace SnipeSharp.Filters
         CheckInCounter,
         /// <summary>The number of times the asset has been requested.</summary>
         [EnumMember(Value = "requests_counter")]
-        RequestsCounter
+        RequestsCounter,
+        /// <summary>The status of the asset in inventory (Deployed, Ready to deploy, Recycle.</summary>
+        [EnumMember(Value = "status")]
+        Status
     }
 }

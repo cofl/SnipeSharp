@@ -1,5 +1,5 @@
-using System;
 using Newtonsoft.Json;
+using System;
 
 namespace SnipeSharp.Serialization.Converters
 {
@@ -10,14 +10,14 @@ namespace SnipeSharp.Serialization.Converters
         public override DateTime? ReadJson(JsonReader reader, Type objectType, DateTime? existingValue, bool hasExistingValue, JsonSerializer serializer)
         {
             var str = serializer.Deserialize<string>(reader);
-            if(!string.IsNullOrWhiteSpace(str) && DateTime.TryParse(str, out var datetime))
+            if (!string.IsNullOrWhiteSpace(str) && DateTime.TryParse(str, out var datetime))
                 return datetime;
             return null;
         }
 
         public override void WriteJson(JsonWriter writer, DateTime? value, JsonSerializer serializer)
         {
-            if(null == value)
+            if (null == value)
                 writer.WriteNull();
             else
                 // value used for checkout_at in app/Http/Controllers/Api/AssetsController.php#checkout(AssetCheckoutRequest,int)

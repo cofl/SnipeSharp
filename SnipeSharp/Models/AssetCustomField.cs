@@ -52,7 +52,7 @@ namespace SnipeSharp.Models
         /// <inheritdoc />
         public override string ToString()
         {
-            if(null != FriendlyName)
+            if (null != FriendlyName)
                 return $"{FriendlyName}: {Value ?? "<empty>"}";
             else
                 return Value ?? base.ToString();

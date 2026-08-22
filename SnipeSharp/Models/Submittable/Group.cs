@@ -1,7 +1,7 @@
-using System.Collections.Generic;
-using SnipeSharp.Serialization;
 using SnipeSharp.EndPoint;
 using SnipeSharp.Models.Enumerations;
+using SnipeSharp.Serialization;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace SnipeSharp.Models

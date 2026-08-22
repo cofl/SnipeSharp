@@ -1,7 +1,7 @@
-using System;
-using SnipeSharp.Serialization;
 using SnipeSharp.EndPoint;
 using SnipeSharp.Models.Enumerations;
+using SnipeSharp.Serialization;
+using System;
 using System.Runtime.Serialization;
 
 namespace SnipeSharp.Models
@@ -174,7 +174,7 @@ namespace SnipeSharp.Models
 
         /// <value>The date this object was soft-deleted in Snipe-IT, or null if it has not been deleted.</value>
         [DeserializeAs("deleted_at", DeserializeAs.Timestamp)]
-        public DateTime? DeletedAt { get ;set; }
+        public DateTime? DeletedAt { get; set; }
 
         /// <inheritdoc />
         [DeserializeAs("available_actions", DeserializeAs.AvailableActions)]

@@ -1,6 +1,5 @@
-using System.Collections.Generic;
-using System.Runtime.Serialization;
 using SnipeSharp.Serialization;
+using System.Runtime.Serialization;
 
 namespace SnipeSharp.Filters
 {
@@ -60,7 +59,7 @@ namespace SnipeSharp.Filters
         [OnSerializing]
         private void OnSerializing(StreamingContext context)
         {
-            if(null != CustomFields && CustomFields.Count > 0)
+            if (null != CustomFields && CustomFields.Count > 0)
                 _customFields = CustomFields;
         }
     }

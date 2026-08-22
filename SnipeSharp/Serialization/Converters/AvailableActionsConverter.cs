@@ -1,7 +1,7 @@
+using Newtonsoft.Json;
+using SnipeSharp.Models.Enumerations;
 using System;
 using System.Collections.Generic;
-using SnipeSharp.Models.Enumerations;
-using Newtonsoft.Json;
 
 namespace SnipeSharp.Serialization.Converters
 {
@@ -12,9 +12,9 @@ namespace SnipeSharp.Serialization.Converters
         {
             var dictionary = serializer.Deserialize<Dictionary<AvailableAction, bool>>(reader);
             var set = AvailableAction.None;
-            if(null != dictionary)
-                foreach(var pair in dictionary)
-                    if(pair.Value)
+            if (null != dictionary)
+                foreach (var pair in dictionary)
+                    if (pair.Value)
                         set |= pair.Key;
             return set;
         }

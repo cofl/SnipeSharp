@@ -9,7 +9,7 @@ namespace SnipeSharp.EndPoint
     {
         /// <param name="api">The Api to grab the RequestManager from.</param>
         /// <exception cref="SnipeSharp.Exceptions.MissingRequiredAttributeException">When the type parameter does not have the <see cref="PathSegmentAttribute">PathSegmentAttribute</see> attribute.</exception>
-        internal FieldSetEndPoint(SnipeItApi api) : base(api) {}
+        internal FieldSetEndPoint(SnipeItApi api) : base(api) { }
 
         /// <summary>
         /// Retrieve the fields of a fieldset.

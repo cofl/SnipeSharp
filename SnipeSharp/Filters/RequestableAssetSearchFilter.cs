@@ -1,5 +1,5 @@
-using System;
 using SnipeSharp.Serialization;
+using System;
 
 namespace SnipeSharp.Filters
 {
@@ -22,11 +22,12 @@ namespace SnipeSharp.Filters
         /// <inheritdoc />
         /// <exception cref="System.ArgumentNullException">If attempting to set a null value.</exception>
         [SerializeAs("search")]
-        public string Search {
+        public string Search
+        {
             get => _SearchString;
             set
             {
-                if(null == value)
+                if (null == value)
                     throw new ArgumentNullException(paramName: nameof(value));
                 _SearchString = value;
             }
@@ -54,7 +55,7 @@ namespace SnipeSharp.Filters
         /// <exception cref="System.ArgumentNullException">If <paramref name="searchString"/> is null.</exception>
         public RequestableAssetSearchFilter(string searchString)
         {
-            if(null == searchString)
+            if (null == searchString)
                 throw new ArgumentNullException(paramName: nameof(searchString));
             Search = searchString;
         }

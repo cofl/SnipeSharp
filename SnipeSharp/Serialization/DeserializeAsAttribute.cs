@@ -10,7 +10,7 @@ namespace SnipeSharp.Serialization
 
         internal DeserializeAsAttribute(string key, DeserializeAs deserializationType = DeserializeAs.Default)
         {
-            if(string.IsNullOrEmpty(key))
+            if (string.IsNullOrEmpty(key))
                 throw new ArgumentException("Key cannot be null or empty.", paramName: nameof(key));
             Key = key;
             DeserializeAs = deserializationType;

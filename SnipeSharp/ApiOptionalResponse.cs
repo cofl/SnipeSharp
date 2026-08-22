@@ -1,6 +1,6 @@
+using SnipeSharp.Models;
 using System;
 using System.Runtime.ExceptionServices;
-using SnipeSharp.Models;
 
 namespace SnipeSharp
 {
@@ -42,7 +42,7 @@ namespace SnipeSharp
         /// <returns>This same response.</returns>
         public ApiOptionalResponse<T> RethrowExceptionIfAny()
         {
-            if(null != Exception)
+            if (null != Exception)
                 ExceptionDispatchInfo.Capture(Exception).Throw();
             return this;
         }

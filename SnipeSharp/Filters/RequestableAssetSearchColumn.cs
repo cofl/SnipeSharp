@@ -13,7 +13,7 @@ namespace SnipeSharp.Filters
     public enum RequestableAssetSearchColumn
     {
         /// <summary>The creation time.</summary>
-        [EnumMember(Value="created_at")] // value is not valid, but defaults to valid in API controller
+        [EnumMember(Value = "created_at")] // value is not valid, but defaults to valid in API controller
         CreationTime = 0,
         /// <summary>The asset model.</summary>
         [EnumMember(Value = "model")]

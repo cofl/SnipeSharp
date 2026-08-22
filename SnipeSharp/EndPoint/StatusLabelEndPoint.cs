@@ -1,5 +1,5 @@
-using System;
 using SnipeSharp.Models;
+using System;
 
 namespace SnipeSharp.EndPoint
 {
@@ -10,7 +10,7 @@ namespace SnipeSharp.EndPoint
     {
         /// <param name="api">The Api to grab the RequestManager from.</param>
         /// <exception cref="SnipeSharp.Exceptions.MissingRequiredAttributeException">When the type parameter does not have the <see cref="PathSegmentAttribute">PathSegmentAttribute</see> attribute.</exception>
-        internal StatusLabelEndPoint(SnipeItApi api) : base(api) {}
+        internal StatusLabelEndPoint(SnipeItApi api) : base(api) { }
 
         /// <summary>
         /// Get the list of assets with a certain status label.
@@ -21,7 +21,7 @@ namespace SnipeSharp.EndPoint
         /// <exception cref="System.ArgumentNullException">If <paramref name="label"/> is null.</exception>
         public ResponseCollection<Asset> GetAssets(StatusLabel label)
         {
-            if(null == label)
+            if (null == label)
                 throw new ArgumentNullException(paramName: nameof(label));
             return Api.RequestManager.GetAll<Asset>($"{EndPointInfo.BaseUri}/{label.Id}/assetlist").RethrowExceptionIfAny().Value;
         }
@@ -35,7 +35,7 @@ namespace SnipeSharp.EndPoint
         /// <exception cref="System.ArgumentNullException">If <paramref name="label"/> is null.</exception>
         public bool IsDeployable(StatusLabel label)
         {
-            if(null == label)
+            if (null == label)
                 throw new ArgumentNullException(paramName: nameof(label));
             return Api.RequestManager.GetRaw($"{EndPointInfo.BaseUri}/{label.Id}/deployable").Trim() == "1";
         }
@@ -49,7 +49,7 @@ namespace SnipeSharp.EndPoint
         /// <exception cref="System.ArgumentNullException">If <paramref name="status"/> is null.</exception>
         public StatusLabel FromAssetStatus(AssetStatus status)
         {
-            if(null == status)
+            if (null == status)
                 throw new ArgumentNullException(paramName: nameof(status));
             return Get(status.StatusId);
         }

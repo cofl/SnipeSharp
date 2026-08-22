@@ -1,6 +1,6 @@
-using System;
 using Newtonsoft.Json;
 using SnipeSharp.Models;
+using System;
 
 namespace SnipeSharp.Serialization.Converters
 {
@@ -8,13 +8,13 @@ namespace SnipeSharp.Serialization.Converters
     {
         internal static readonly SerializeToIdArrayConverter Instance = new SerializeToIdArrayConverter();
         public override AbstractBaseModel[] ReadJson(JsonReader reader, Type objectType, AbstractBaseModel[] existingValue, bool hasExistingValue, JsonSerializer serializer)
-            => (AbstractBaseModel[]) serializer.Deserialize<GenericEndPointModel[]>(reader);
+            => (AbstractBaseModel[])serializer.Deserialize<GenericEndPointModel[]>(reader);
 
         public override void WriteJson(JsonWriter writer, AbstractBaseModel[] value, JsonSerializer serializer)
         {
             writer.WriteStartArray();
-            if(null != value)
-                foreach(var item in value)
+            if (null != value)
+                foreach (var item in value)
                     writer.WriteValue(item.Id);
             writer.WriteEndArray();
         }

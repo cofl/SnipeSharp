@@ -1,10 +1,10 @@
-using System;
-using System.Linq;
-using System.Reflection;
+using SnipeSharp.Exceptions;
 using SnipeSharp.Filters;
 using SnipeSharp.Models;
 using SnipeSharp.Serialization;
-using SnipeSharp.Exceptions;
+using System;
+using System.Linq;
+using System.Reflection;
 
 namespace SnipeSharp.EndPoint
 {
@@ -13,7 +13,7 @@ namespace SnipeSharp.EndPoint
     /// </summary>
     /// <typeparam name="T">A <see cref="Models.AbstractBaseModel">AbstractBaseModel</see> with the <see cref="PathSegmentAttribute">PathSegmentAttribute</see> attribute.</typeparam>
     public class EndPoint<T> : IEndPoint<T>
-        where T: AbstractBaseModel
+        where T : AbstractBaseModel
     {
         /// <summary>The API instance this endpoint is a part of.</summary>
         protected readonly SnipeItApi Api;
@@ -27,7 +27,7 @@ namespace SnipeSharp.EndPoint
         {
             Api = api;
             EndPointInfo = typeof(T).GetCustomAttribute<PathSegmentAttribute>();
-            if(null == EndPointInfo)
+            if (null == EndPointInfo)
                 throw new MissingRequiredAttributeException(nameof(PathSegmentAttribute), typeof(T).Name);
         }
 
@@ -50,11 +50,11 @@ namespace SnipeSharp.EndPoint
         /// <inheritdoc />
         public ApiOptionalResponse<T> FindOneOptional(ISearchFilter filter = null)
         {
-            if(null == filter)
+            if (null == filter)
                 filter = new SearchFilter();
             filter.Limit = 1;
             var response = Api.RequestManager.Get<ResponseCollection<T>>(EndPointInfo.BaseUri, filter);
-            if(!response.HasValue)
+            if (!response.HasValue)
                 return new ApiOptionalResponse<T> { Exception = response.Exception };
             return new ApiOptionalResponse<T> { Value = response.Value.FirstOrDefault() };
         }
@@ -90,7 +90,7 @@ namespace SnipeSharp.EndPoint
             filter.Search = name;
             var comparer = caseSensitive ? StringComparer.Ordinal : StringComparer.OrdinalIgnoreCase;
             var result = FindAllOptional(filter);
-            if(!result.HasValue)
+            if (!result.HasValue)
                 return new ApiOptionalResponse<T> { Exception = result.Exception };
             return new ApiOptionalResponse<T> { Value = result.Value.Where(i => comparer.Equals(i.Name, name)).FirstOrDefault() };
         }
@@ -102,6 +102,10 @@ namespace SnipeSharp.EndPoint
         /// <inheritdoc />
         public ApiOptionalMultiResponse<T> GetAllOptional()
             => FindAllOptional();
+
+        /// <inheritdoc />
+        public ApiOptionalMultiResponse<T> GetAllOptional(ISearchFilter filter = null)
+        => FindAllOptional(filter);
 
         /// <inheritdoc />
         public T Create(T toCreate)
@@ -119,7 +123,7 @@ namespace SnipeSharp.EndPoint
         public T Set(T toSet)
         {
             var patchable = toSet as IPatchable;
-            if(null != patchable)
+            if (null != patchable)
                 patchable.SetAllModifiedState(true);
             return Api.RequestManager.Put($"{EndPointInfo.BaseUri}/{toSet.Id}", CheckRequiredFields(toSet)).RethrowExceptionIfAny().Value.Payload;
         }
@@ -134,8 +138,8 @@ namespace SnipeSharp.EndPoint
 
         private T CheckRequiredFields(T @object)
         {
-            foreach(var property in typeof(T).GetProperties())
-                if(property.GetCustomAttribute<SerializeAsAttribute>() is SerializeAsAttribute attribute && attribute.IsRequired && null == property.GetValue(@object))
+            foreach (var property in typeof(T).GetProperties())
+                if (property.GetCustomAttribute<SerializeAsAttribute>() is SerializeAsAttribute attribute && attribute.IsRequired && null == property.GetValue(@object))
                     throw new MissingRequiredFieldException<T>(property.Name);
             return @object;
         }

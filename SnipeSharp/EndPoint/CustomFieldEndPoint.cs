@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using SnipeSharp.Models;
+using System.Collections.Generic;
 
 namespace SnipeSharp.EndPoint
 {
@@ -10,7 +10,7 @@ namespace SnipeSharp.EndPoint
     {
         /// <param name="api">The Api to grab the RequestManager from.</param>
         /// <exception cref="SnipeSharp.Exceptions.MissingRequiredAttributeException">When the type parameter does not have the <see cref="PathSegmentAttribute">PathSegmentAttribute</see> attribute.</exception>
-        internal CustomFieldEndPoint(SnipeItApi api) : base(api) {}
+        internal CustomFieldEndPoint(SnipeItApi api) : base(api) { }
 
         /// <summary>
         /// Associates a custom field with a custom field set.
@@ -22,11 +22,12 @@ namespace SnipeSharp.EndPoint
         /// <returns>The request status.</returns>
         public RequestResponse<FieldSet> Associate(CustomField field, FieldSet fieldSet, bool required = false, int? order = null)
         {
-            var obj = new CustomFieldAssociation {
+            var obj = new CustomFieldAssociation
+            {
                 FieldSet = fieldSet,
                 IsRequired = required
             };
-            if(null != order)
+            if (null != order)
                 obj.Order = order.Value;
             return Api.RequestManager.Post<CustomFieldAssociation, FieldSet>($"{EndPointInfo.BaseUri}/{field.Id}/associate", obj).RethrowExceptionIfAny().Value;
         }

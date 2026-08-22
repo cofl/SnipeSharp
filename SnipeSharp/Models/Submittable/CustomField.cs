@@ -1,7 +1,7 @@
-using System;
-using SnipeSharp.Serialization;
 using SnipeSharp.EndPoint;
 using SnipeSharp.Models.Enumerations;
+using SnipeSharp.Serialization;
+using System;
 using System.Runtime.Serialization;
 
 namespace SnipeSharp.Models
@@ -116,7 +116,7 @@ namespace SnipeSharp.Models
         private bool isFormatModified = false;
         private string format;
 
-        private readonly static string[] EndOfLines = new string[]{ "\n", "\r\n" };
+        private readonly static string[] EndOfLines = new string[] { "\n", "\r\n" };
 
         /// <value>Gets/sets the raw value of any list type, separated by newlines.</value>
         [DeserializeAs("field_values")]
@@ -129,7 +129,7 @@ namespace SnipeSharp.Models
             {
                 isFieldValuesRawModified = true;
                 fieldValuesRaw = value;
-                if(null == value)
+                if (null == value)
                     FieldValues = new string[0];
                 else
                     FieldValues = value.Split(EndOfLines, StringSplitOptions.None);

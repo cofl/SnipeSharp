@@ -1,5 +1,5 @@
-using SnipeSharp.Serialization;
 using SnipeSharp.Models;
+using SnipeSharp.Serialization;
 
 namespace SnipeSharp.Filters
 {

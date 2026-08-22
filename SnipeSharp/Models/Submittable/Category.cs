@@ -1,8 +1,8 @@
-using SnipeSharp.Serialization;
 using SnipeSharp.EndPoint;
 using SnipeSharp.Models.Enumerations;
-using System.Runtime.Serialization;
+using SnipeSharp.Serialization;
 using System;
+using System.Runtime.Serialization;
 
 namespace SnipeSharp.Models
 {
@@ -172,7 +172,7 @@ namespace SnipeSharp.Models
         {
             get
             {
-                switch(CategoryType)
+                switch (CategoryType)
                 {
                     case Enumerations.CategoryType.Accessory:
                         return AccessoriesCount;

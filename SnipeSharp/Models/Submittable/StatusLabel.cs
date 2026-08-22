@@ -1,6 +1,7 @@
-using SnipeSharp.Serialization;
 using SnipeSharp.EndPoint;
 using SnipeSharp.Models.Enumerations;
+using SnipeSharp.Serialization;
+using System;
 using System.Runtime.Serialization;
 
 namespace SnipeSharp.Models
@@ -114,6 +115,11 @@ namespace SnipeSharp.Models
         private void OnDeserialized(StreamingContext context)
         {
             ((IPatchable)this).SetAllModifiedState(false);
+        }
+
+        public static implicit operator StatusLabel(string v)
+        {
+            throw new NotImplementedException();
         }
     }
 }

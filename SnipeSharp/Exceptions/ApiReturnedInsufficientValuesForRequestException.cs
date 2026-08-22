@@ -8,7 +8,7 @@ namespace SnipeSharp.Exceptions
     /// nor the total have been reached.
     /// </summary>
     /// <seealso cref="RestClientManager.GetAll{R}(string, Filters.ISearchFilter)"/>
-    public sealed class ApiReturnedInsufficientValuesForRequestException: Exception
+    public sealed class ApiReturnedInsufficientValuesForRequestException : Exception
     {
     }
 }

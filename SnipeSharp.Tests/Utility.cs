@@ -30,7 +30,7 @@ namespace SnipeSharp.Tests
             return new SnipeItApi(restClient: client) { Token = TEST_TOKEN, Uri = TEST_URI };
         }
 
-        internal static SnipeItApi MultipleUseApi(out Queue<IRestResponse> responseQueue)
+        internal static SnipeItApi MultipleUseApi(out Queue<RestResponse> responseQueue)
         {
             var client = new FakeRestClient();
             responseQueue = client.Responses;

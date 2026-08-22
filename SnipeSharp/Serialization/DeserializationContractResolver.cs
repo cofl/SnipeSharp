@@ -13,11 +13,11 @@ namespace SnipeSharp.Serialization
         {
             var property = base.CreateProperty(member, memberSerialization);
             var attribute = member.GetCustomAttribute<DeserializeAsAttribute>(inherit: false);
-            if(null != attribute)
+            if (null != attribute)
             {
                 property.PropertyName = attribute.Key;
                 property.Writable = true;
-                switch(attribute.DeserializeAs)
+                switch (attribute.DeserializeAs)
                 {
                     case DeserializeAs.Default:
                         break;
@@ -52,7 +52,8 @@ namespace SnipeSharp.Serialization
                         property.Converter = PermissionDictionaryConverter.Instance;
                         break;
                 }
-            } else
+            }
+            else
             {
                 property.Ignored = true;
             }
@@ -64,8 +65,8 @@ namespace SnipeSharp.Serialization
             // start with the defaults
             var list = base.GetSerializableMembers(objectType);
             // add non-public, readable, serializable properties
-            foreach(var member in objectType.GetProperties(BindingFlags.Instance | BindingFlags.NonPublic))
-                if(member.CanWrite)
+            foreach (var member in objectType.GetProperties(BindingFlags.Instance | BindingFlags.NonPublic))
+                if (member.CanWrite)
                     list.Add(member);
             return list;
         }

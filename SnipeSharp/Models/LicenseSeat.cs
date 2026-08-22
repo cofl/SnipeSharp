@@ -1,5 +1,5 @@
-using SnipeSharp.Serialization;
 using SnipeSharp.Models.Enumerations;
+using SnipeSharp.Serialization;
 
 namespace SnipeSharp.Models
 {

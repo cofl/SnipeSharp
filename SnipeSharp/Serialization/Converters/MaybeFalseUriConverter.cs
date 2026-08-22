@@ -1,5 +1,5 @@
-using System;
 using Newtonsoft.Json;
+using System;
 
 namespace SnipeSharp.Serialization.Converters
 {
@@ -9,12 +9,12 @@ namespace SnipeSharp.Serialization.Converters
         public override Uri ReadJson(JsonReader reader, Type objectType, Uri existingValue, bool hasExistingValue, JsonSerializer serializer)
         {
             var obj = serializer.Deserialize(reader) as string;
-            if(null == obj)
+            if (null == obj)
                 return null;
             return new Uri(obj);
         }
 
-        public override void WriteJson(JsonWriter writer,  Uri value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, Uri value, JsonSerializer serializer)
             => throw new NotImplementedException();
     }
 }

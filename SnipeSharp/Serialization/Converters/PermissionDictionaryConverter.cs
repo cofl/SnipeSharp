@@ -1,6 +1,6 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 
 namespace SnipeSharp.Serialization
 {
@@ -11,9 +11,9 @@ namespace SnipeSharp.Serialization
         {
             var rawDictionary = serializer.Deserialize<Dictionary<string, int>>(reader);
             var newDictionary = new Dictionary<string, bool>();
-            if(null != rawDictionary)
+            if (null != rawDictionary)
             {
-                foreach(var pair in rawDictionary)
+                foreach (var pair in rawDictionary)
                 {
                     newDictionary[pair.Key] = pair.Value != 0;
                 }

@@ -1,8 +1,8 @@
-using System;
-using System.Collections.Generic;
 using Newtonsoft.Json;
 using SnipeSharp.Collections;
 using SnipeSharp.Models;
+using System;
+using System.Collections.Generic;
 
 namespace SnipeSharp.Serialization.Converters
 {
@@ -12,17 +12,18 @@ namespace SnipeSharp.Serialization.Converters
 
         public override CustomFieldDictionary ReadJson(JsonReader reader, Type objectType, CustomFieldDictionary existingValue, bool hasExistingValue, JsonSerializer serializer)
         {
-            if(reader.TokenType == JsonToken.StartArray)
+            if (reader.TokenType == JsonToken.StartArray)
             {
                 serializer.Deserialize(reader); // discard, we don't want an array.
                 return existingValue;
-            } else
+            }
+            else
             {
                 var values = serializer.Deserialize<Dictionary<string, AssetCustomField>>(reader);
-                if(null == values)
+                if (null == values)
                     throw new NullReferenceException("Failed to deserialize AssetCustomField dictionary");
                 var dictionary = new CustomFieldDictionary();
-                foreach(var pair in values)
+                foreach (var pair in values)
                 {
                     pair.Value.FriendlyName = pair.Key;
                     dictionary.Add(pair.Value);

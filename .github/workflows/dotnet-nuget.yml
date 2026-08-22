@@ -1,0 +1,52 @@
+name: Build and Package NuGet
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Restore dependencies
+      run: 
+        dotnet restore SnipeSharp/SnipeSharp.csproj
+
+    - name: Set version number to date/time
+      run: |
+        #ls SnipeSharp
+        echo "Setting version number"
+        VERSION=$(date +'%Y.%m.%d.%H%M')
+        cat SnipeSharp/SnipeSharp.csproj # View the updated 
+        sed -i "s/<Version>.*<\/Version>/<Version>$VERSION<\/Version>/" SnipeSharp/SnipeSharp.csproj
+        cat SnipeSharp/SnipeSharp.csproj # View the updated 
+        
+    - name: Build
+      run: 
+        dotnet build SnipeSharp/SnipeSharp.csproj --configuration Release
+
+    - name: Pack
+      run: 
+        dotnet pack SnipeSharp/SnipeSharp.csproj --configuration Release --output ./nupkgs
+
+    - name: Upload NuGet Packages
+      uses: actions/upload-artifact@v4
+      with:
+        name: nuget-packages
+        path: ./nupkgs/*.nupkg
+
+    - name: Push nuget package to Github
+      run: dotnet nuget push ./nupkgs/*.nupkg --api-key ${{ secrets.NUGET_GITHUB }} --source "https://nuget.pkg.github.com/rlouch2/index.json"
+    #- name: Push to NuGet
+    #  run: dotnet nuget push ./nupkgs/*.nupkg --api-key ${{ secrets.NUGET }} --source https://api.nuget.org/v3/index.json

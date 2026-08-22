@@ -9,7 +9,7 @@ namespace SnipeSharp.EndPoint
     {
         /// <param name="api">The Api to grab the RequestManager from.</param>
         /// <exception cref="SnipeSharp.Exceptions.MissingRequiredAttributeException">When the type parameter does not have the <see cref="PathSegmentAttribute">PathSegmentAttribute</see> attribute.</exception>
-        internal AccessoryEndPoint(SnipeItApi api) : base(api) {}
+        internal AccessoryEndPoint(SnipeItApi api) : base(api) { }
 
         /// <summary>
         /// Get the list of accessory check outs for an accessory.
@@ -27,7 +27,7 @@ namespace SnipeSharp.EndPoint
         /// <param name="note">An optional note for the checkout log.</param>
         /// <returns></returns>
         public RequestResponse<ApiObject> CheckOut(Accessory accessory, User assignedUser, string note = null)
-            => CheckOut(new AccessoryCheckOutRequest(accessory, assignedUser){ Note = note });
+            => CheckOut(new AccessoryCheckOutRequest(accessory, assignedUser) { Note = note });
 
         /// <summary>
         /// Check out an accessory.
@@ -44,7 +44,7 @@ namespace SnipeSharp.EndPoint
         /// <param name="note">An optional note for the checkin log.</param>
         /// <returns></returns>
         public RequestResponse<ApiObject> CheckIn(Accessory accessory, string note = null)
-            => CheckIn(new AccessoryCheckInRequest(accessory){ Note = note });
+            => CheckIn(new AccessoryCheckInRequest(accessory) { Note = note });
 
         /// <summary>
         /// Check in an accessory.

@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>net8.0</TargetFrameworks>
     <OutputType>library</OutputType>
     <AssemblyName>SnipeSharp.PowerShell</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
@@ -12,7 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="PowerShellStandard.Library" Version="5.1.0" />
+    <PackageReference Include="PowerShellStandard.Library" Version="5.1.1" />
 
     <ProjectReference Include="../SnipeSharp/SnipeSharp.csproj" />
     <None Update="$(AssemblyName).psd1;$(AssemblyName)*.ps1xml" CopyToOutputDirectory="PreserveNewest" />

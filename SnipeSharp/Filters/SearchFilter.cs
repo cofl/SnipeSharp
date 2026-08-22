@@ -1,10 +1,9 @@
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using SnipeSharp.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using SnipeSharp.Models;
-using SnipeSharp.Serialization;
 
 namespace SnipeSharp.Filters
 {
@@ -26,11 +25,12 @@ namespace SnipeSharp.Filters
         /// <inheritdoc />
         /// <exception cref="System.ArgumentNullException">If attempting to set a null value.</exception>
         [SerializeAs("search")]
-        public string Search {
+        public string Search
+        {
             get => _SearchString;
             set
             {
-                if(null == value)
+                if (null == value)
                     throw new ArgumentNullException(paramName: nameof(value));
                 _SearchString = value;
             }
@@ -64,7 +64,7 @@ namespace SnipeSharp.Filters
         /// <exception cref="System.ArgumentNullException">If <paramref name="searchString"/> is null.</exception>
         public SearchFilter(string searchString)
         {
-            if(null == searchString)
+            if (null == searchString)
                 throw new ArgumentNullException(paramName: nameof(searchString));
             Search = searchString;
         }
@@ -85,8 +85,8 @@ namespace SnipeSharp.Filters
         private void OnSerializing(StreamingContext context)
         {
             _customFields = new Dictionary<string, JToken>();
-            if(null != CustomFields)
-                foreach(var pair in CustomFields)
+            if (null != CustomFields)
+                foreach (var pair in CustomFields)
                     _customFields[pair.Key] = pair.Value;
         }
     }

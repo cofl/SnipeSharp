@@ -1,6 +1,6 @@
-using SnipeSharp.Models;
-using SnipeSharp.Filters;
 using SnipeSharp.Exceptions;
+using SnipeSharp.Filters;
+using SnipeSharp.Models;
 
 namespace SnipeSharp.EndPoint
 {
@@ -11,7 +11,7 @@ namespace SnipeSharp.EndPoint
     {
         /// <param name="api">The Api to grab the RequestManager from.</param>
         /// <exception cref="SnipeSharp.Exceptions.MissingRequiredAttributeException">When the type parameter does not have the <see cref="PathSegmentAttribute">PathSegmentAttribute</see> attribute.</exception>
-        internal UserEndPoint(SnipeItApi api) : base(api) {}
+        internal UserEndPoint(SnipeItApi api) : base(api) { }
 
         /// <summary>
         /// Get the assets assigned to a user.
@@ -68,10 +68,10 @@ namespace SnipeSharp.EndPoint
             filter = filter ?? new UserSearchFilter();
             filter.Search = username;
             var results = FindAllOptional(filter);
-            if(!results.HasValue)
+            if (!results.HasValue)
                 return new ApiOptionalResponse<User> { Exception = results.Exception };
-            foreach(var user in results.Value)
-                if(user.UserName == username)
+            foreach (var user in results.Value)
+                if (user.UserName == username)
                     return new ApiOptionalResponse<User> { Value = user };
             return new ApiOptionalResponse<User> { Exception = new ApiErrorException($"No user was found by the username \"{username}\".") };
         }
@@ -85,12 +85,12 @@ namespace SnipeSharp.EndPoint
         public ApiOptionalResponse<User> GetByEmailAddressOptional(string email, UserSearchFilter filter = null)
         {
             filter = filter ?? new UserSearchFilter();
-            filter.Search = email;
+            filter.Email = email;
             var results = FindAllOptional(filter);
-            if(!results.HasValue)
+            if (!results.HasValue)
                 return new ApiOptionalResponse<User> { Exception = results.Exception };
-            foreach(var user in results.Value)
-                if(user.EmailAddress == email)
+            foreach (var user in results.Value)
+                if (user.EmailAddress == email)
                     return new ApiOptionalResponse<User> { Value = user };
             return new ApiOptionalResponse<User> { Exception = new ApiErrorException($"No user was found by the email address \"{email}\".") };
         }

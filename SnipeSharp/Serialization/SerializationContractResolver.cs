@@ -9,15 +9,15 @@ namespace SnipeSharp.Serialization
     {
         public static bool TryGetConverter(PropertyInfo property, SerializeAsAttribute fieldConverter, out JsonConverter converter)
         {
-            switch(fieldConverter.SerializeAs)
+            switch (fieldConverter.SerializeAs)
             {
                 case SerializeAs.Default:
-                    if(null == property)
+                    if (null == property)
                     {
                         converter = null;
                         return false;
                     }
-                    if(property.PropertyType.IsAssignableFrom(typeof(bool?)))
+                    if (property.PropertyType.IsAssignableFrom(typeof(bool?)))
                     {
                         converter = NullableBooleanConverter.Instance;
                         return true;
@@ -27,6 +27,9 @@ namespace SnipeSharp.Serialization
                     return false;
                 case SerializeAs.SimpleDate:
                     converter = SimpleDateConverter.Instance;
+                    return true;
+                case SerializeAs.SimpleDateOnly:
+                    converter = SimpleDateOnlyConverter.Instance;
                     return true;
                 case SerializeAs.Timespan:
                     converter = TimeSpanConverter.Instance;
@@ -46,15 +49,15 @@ namespace SnipeSharp.Serialization
         {
             var property = base.CreateProperty(member, memberSerialization);
             var attribute = member.GetCustomAttribute<SerializeAsAttribute>(inherit: false);
-            if((null != attribute && !string.IsNullOrEmpty(attribute.Key)))
+            if ((null != attribute && !string.IsNullOrEmpty(attribute.Key)))
             {
                 property.PropertyName = attribute.Key;
                 property.Readable = true;
                 var patch = member.GetCustomAttribute<PatchAttribute>(true);
-                if(null != patch)
+                if (null != patch)
                 {
                     var targetField = member.DeclaringType.GetField(patch.IndicatorFieldName, BindingFlags.Instance | BindingFlags.NonPublic);
-                    if(null != targetField)
+                    if (null != targetField)
                         property.ShouldSerialize = (instance) => (bool)targetField.GetValue(instance);
                     else
                     {
@@ -62,9 +65,10 @@ namespace SnipeSharp.Serialization
                         property.ShouldSerialize = (instance) => (bool)targetProperty.GetValue(instance);
                     }
                 }
-                if(TryGetConverter(member as PropertyInfo, attribute, out var converter))
+                if (TryGetConverter(member as PropertyInfo, attribute, out var converter))
                     property.Converter = converter;
-            } else
+            }
+            else
             {
                 property.Ignored = true;
             }

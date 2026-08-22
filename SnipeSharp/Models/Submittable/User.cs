@@ -1,8 +1,8 @@
-using System;
-using System.Collections.Generic;
-using SnipeSharp.Serialization;
 using SnipeSharp.EndPoint;
 using SnipeSharp.Models.Enumerations;
+using SnipeSharp.Serialization;
+using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace SnipeSharp.Models
@@ -40,7 +40,8 @@ namespace SnipeSharp.Models
         /// <value>Gets the user's name.</value>
         /// <remarks>This field cannot be used to set a user's name; it is constructed from the <see cref="FirstName"/> and <see cref="LastName"/> by the API.</remarks>
         [DeserializeAs("name")]
-        public override string Name {
+        public override string Name
+        {
             get => base.Name;
             set => base.Name = value;
         }

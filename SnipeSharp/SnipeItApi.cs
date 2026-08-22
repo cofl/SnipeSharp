@@ -1,8 +1,10 @@
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 using RestSharp;
+using RestSharp.Authenticators.OAuth2;
 using SnipeSharp.EndPoint;
 using SnipeSharp.Models;
+using System;
+using System.Collections.Generic;
 
 namespace SnipeSharp
 {
@@ -20,7 +22,7 @@ namespace SnipeSharp
         /// <summary>
         /// A list of responses from the RestClientManager. Used for debugging purposes.
         /// </summary>
-        public List<IRestResponse> DebugResponseList = new List<IRestResponse>();
+        public List<RestResponse> DebugResponseList = new List<RestResponse>();
 
         /// <summary>
         /// A list of request bodies from the RestClientManager. Used for debugging purposes.
@@ -40,7 +42,7 @@ namespace SnipeSharp
             set
             {
                 _token = value;
-                RequestManager.ResetToken();
+                //RequestManager.ResetToken();
             }
         }
 
@@ -56,7 +58,7 @@ namespace SnipeSharp
             set
             {
                 _uri = value;
-                RequestManager.ResetUri();
+                //RequestManager.ResetUri();
             }
         }
 
@@ -74,7 +76,8 @@ namespace SnipeSharp
             {
                 RequestManager.SetTokenAndUri();
                 Users.Me();
-            } catch
+            }
+            catch
             {
                 // any other error return false
                 return false;
@@ -92,9 +95,9 @@ namespace SnipeSharp
         /// </summary>
         /// <typeparam name="T">A <see cref="SnipeSharp.Models.AbstractBaseModel">AbstractBaseModel</see> with the attribute <see cref="SnipeSharp.EndPoint.PathSegmentAttribute">PathSegmentAttribute</see>.</typeparam>
         /// <returns>An <see cref="SnipeSharp.EndPoint.EndPoint{T}">EndPoint</see> for the provided type.</returns>
-        public EndPoint<T> GetEndPoint<T>() where T: AbstractBaseModel
+        public EndPoint<T> GetEndPoint<T>() where T : AbstractBaseModel
         {
-            if(_typeEndPointObjectMap.TryGetValue(typeof(T), out var endpoint))
+            if (_typeEndPointObjectMap.TryGetValue(typeof(T), out var endpoint))
                 return (EndPoint<T>)endpoint;
             throw new ArgumentException("Unrecognized end point type", nameof(T), null);
         }
@@ -203,18 +206,15 @@ namespace SnipeSharp
         /// <para>Constructs a wrapper for the Snipe-IT web API.</para>
         /// <para>The Token and Uri must be set either in an initializer or manually after construction.</para>
         /// </summary>
-        public SnipeItApi() : this(new RestClient())
+        public SnipeItApi(System.Uri uri, string token)
         {
-        }
+            this.Uri = uri;
+            this.Token = token;
+            RestClientOptions options = new RestClientOptions(Uri);
+            var authenticator = new OAuth2AuthorizationRequestHeaderAuthenticator(Token, "Bearer");
+            options.Authenticator = authenticator;
 
-        /// <summary>
-        /// <para>Constructs a wrapper for the Snipe-IT web API.</para>
-        /// <para>The Token and Uri must be set either in an initializer or manually after construction.</para>
-        /// </summary>
-        /// <remarks>This constructor is for internal and testing use.</remarks>
-        internal SnipeItApi(IRestClient restClient)
-        {
-            RequestManager = new RestClientManager(this, restClient);
+            this.RequestManager = new RestClientManager(this, options);
 
             // endpoints
             Account = new AccountEndPoint(this);

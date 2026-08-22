@@ -11,10 +11,10 @@ namespace SnipeSharp.Serialization.Converters
 
         public override bool CanConvert(Type objectType)
         {
-            if(objectType.IsGenericType && typeof(IReadOnlyCollection<>) == objectType.GetGenericTypeDefinition())
+            if (objectType.IsGenericType && typeof(IReadOnlyCollection<>) == objectType.GetGenericTypeDefinition())
                 return true;
-            foreach(var a in objectType.GetInterfaces())
-                if(a.IsGenericType && typeof(IReadOnlyCollection<>) == a.GetGenericTypeDefinition())
+            foreach (var a in objectType.GetInterfaces())
+                if (a.IsGenericType && typeof(IReadOnlyCollection<>) == a.GetGenericTypeDefinition())
                     return true;
             return false;
         }

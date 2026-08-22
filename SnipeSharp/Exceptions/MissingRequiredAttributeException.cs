@@ -12,7 +12,7 @@ namespace SnipeSharp.Exceptions
         /// </summary>
         /// <param name="attributeName">The name of the required attribute class.</param>
         /// <param name="className">The name of the class that is missing the required attribute.</param>
-        public MissingRequiredAttributeException(string attributeName, string className): base($"Missing required attribute \"{attributeName}\" on class \"{className}\".")
+        public MissingRequiredAttributeException(string attributeName, string className) : base($"Missing required attribute \"{attributeName}\" on class \"{className}\".")
         {
         }
     }

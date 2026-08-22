@@ -11,10 +11,10 @@ namespace SnipeSharp.Serialization.Converters
         {
             // from DepreciationsTransformer.php, month strings are created in the form $"{monthInteger} {translate("general.months")}"
             var str = serializer.Deserialize<string>(reader);
-            if(null == str || str == "None")
+            if (null == str || str == "None")
                 // in AssetModelsTransformer.php, if there is no eol, the string "None" is returned rather than null.
                 return null;
-            if(int.TryParse(str.Split(' ')[0], out var asInt))
+            if (int.TryParse(str.Split(' ')[0], out var asInt))
                 return asInt;
             return null;
         }

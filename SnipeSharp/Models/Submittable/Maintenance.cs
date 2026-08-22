@@ -1,7 +1,7 @@
-using System;
-using SnipeSharp.Serialization;
 using SnipeSharp.EndPoint;
 using SnipeSharp.Models.Enumerations;
+using SnipeSharp.Serialization;
+using System;
 using System.Runtime.Serialization;
 
 namespace SnipeSharp.Models
@@ -43,8 +43,8 @@ namespace SnipeSharp.Models
 
         /// <inheritdoc />
         /// <remarks>This field is required.</remarks>
-        [DeserializeAs("title")]
-        [SerializeAs("title")]
+        [DeserializeAs("name")]
+        [SerializeAs("name")]
         [Patch(nameof(isNameModified))]
         public override string Name
         {
@@ -145,7 +145,7 @@ namespace SnipeSharp.Models
 
         /// <value>Gets/sets the date the maintenance begins.</value>
         [DeserializeAs("start_date", DeserializeAs.DateObject)]
-        [SerializeAs("start_date", SerializeAs.SimpleDate, IsRequired = true)]
+        [SerializeAs("start_date", SerializeAs.SimpleDateOnly, IsRequired = true)]
         [Patch(nameof(isStartDateModified))]
         public DateTime? StartDate
         {
@@ -165,7 +165,7 @@ namespace SnipeSharp.Models
 
         /// <value>Gets/sets the date the maintenance ends.</value>
         [DeserializeAs("completion_date", DeserializeAs.DateObject)]
-        [SerializeAs("completion_date", SerializeAs.SimpleDate)]
+        [SerializeAs("completion_date", SerializeAs.SimpleDateOnly)]
         [Patch(nameof(isCompletionDateModified))]
         public DateTime? CompletionDate
         {

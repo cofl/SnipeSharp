@@ -25,7 +25,8 @@ namespace SnipeSharp.Models
         /// </summary>
         [DeserializeAs("required")]
         [SerializeAs("required")]
-        public bool IsRequired {
+        public bool IsRequired
+        {
             get => _isRequired == IsRequiredType.On;
             set => _isRequired = value ? IsRequiredType.On : IsRequiredType.Off;
         }
@@ -34,6 +35,6 @@ namespace SnipeSharp.Models
         /// The order of the field in the fieldset.
         /// </summary>
         [SerializeAs("order")]
-        public int Order { get; set ;}
+        public int Order { get; set; }
     }
 }

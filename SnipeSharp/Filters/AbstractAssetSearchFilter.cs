@@ -1,6 +1,6 @@
-using SnipeSharp.Serialization;
 using SnipeSharp.Models;
 using SnipeSharp.Models.Enumerations;
+using SnipeSharp.Serialization;
 using System.Collections.Generic;
 
 namespace SnipeSharp.Filters

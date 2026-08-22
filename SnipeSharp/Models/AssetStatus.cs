@@ -1,5 +1,5 @@
-using SnipeSharp.Serialization;
 using SnipeSharp.Models.Enumerations;
+using SnipeSharp.Serialization;
 
 namespace SnipeSharp.Models
 {
@@ -41,7 +41,7 @@ namespace SnipeSharp.Models
         /// <inheritdoc />
         public override string ToString()
         {
-            if(null == StatusMeta)
+            if (null == StatusMeta)
                 return Name ?? StatusId.ToString();
             return $"{Name ?? StatusId.ToString()}: {StatusMeta}";
         }

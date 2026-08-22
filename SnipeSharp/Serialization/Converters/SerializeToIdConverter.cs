@@ -1,6 +1,6 @@
-using System;
 using Newtonsoft.Json;
 using SnipeSharp.Models;
+using System;
 
 namespace SnipeSharp.Serialization.Converters
 {
@@ -11,7 +11,7 @@ namespace SnipeSharp.Serialization.Converters
             => throw new NotImplementedException();
         public override void WriteJson(JsonWriter writer, IObjectWithId value, JsonSerializer serializer)
         {
-            if(null == value)
+            if (null == value)
                 writer.WriteNull();
             else
                 writer.WriteValue(value.Id);

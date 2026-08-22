@@ -1,6 +1,6 @@
-using System;
 using SnipeSharp.Models.Enumerations;
 using SnipeSharp.Serialization;
+using System;
 
 namespace SnipeSharp.Models
 {

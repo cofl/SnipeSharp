@@ -1,10 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SnipeSharp.Models.Enumerations;
 using SnipeSharp.Serialization;
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace SnipeSharp.Models
 {
@@ -63,10 +63,10 @@ namespace SnipeSharp.Models
         [OnDeserialized]
         private void OnDeserialized(StreamingContext context)
         {
-            if(null == _extensionData)
+            if (null == _extensionData)
                 return;
             var dict = new Dictionary<string, string>();
-            foreach(var pair in _extensionData)
+            foreach (var pair in _extensionData)
                 dict[pair.Key] = pair.Value.ToObject<string>();
             ExtensionData = dict;
             _extensionData = null;
@@ -78,7 +78,7 @@ namespace SnipeSharp.Models
         /// <returns>A stub user object, with only the ID field populated.</returns>
         public StubUser AsUser()
         {
-            if(Type != AssignedToType.User)
+            if (Type != AssignedToType.User)
                 throw new InvalidOperationException($"Object {Id} is a \"{Type}\", not a User.");
             return new StubUser(
                 id: Id,
@@ -96,7 +96,7 @@ namespace SnipeSharp.Models
         /// <returns>A stub location object.</returns>
         public Stub<Location> AsLocation()
         {
-            if(Type != AssignedToType.Location)
+            if (Type != AssignedToType.Location)
                 throw new InvalidOperationException($"Object {Id} is a \"{Type}\", not a Location.");
             // location assignments have no extension data to copy
             return new Stub<Location>(Id, Name);
@@ -108,7 +108,7 @@ namespace SnipeSharp.Models
         /// <returns>A stub asset object.</returns>
         public Stub<Asset> AsAsset()
         {
-            if(Type != AssignedToType.Asset)
+            if (Type != AssignedToType.Asset)
                 throw new InvalidOperationException($"Object {Id} is a \"{Type}\", not a Asset.");
             // asset assignments have no extension data to copy
             return new Stub<Asset>(Id, Name);

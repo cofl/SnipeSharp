@@ -1,6 +1,6 @@
-using System;
-using SnipeSharp.Serialization;
 using SnipeSharp.Models.Enumerations;
+using SnipeSharp.Serialization;
+using System;
 
 namespace SnipeSharp.Models
 {
@@ -79,7 +79,7 @@ namespace SnipeSharp.Models
         {
             Asset = asset;
             AssignedAsset = assignedAsset;
-            if(assignedAsset.IsDeleted)
+            if (assignedAsset.IsDeleted)
                 throw new ArgumentException("Cannot check out to a deleted asset.", paramName: nameof(assignedAsset));
             AssignedToType = AssignedToType.Asset;
         }

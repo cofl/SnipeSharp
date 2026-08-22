@@ -1,12 +1,12 @@
-using System;
-using System.Collections.Generic;
-using SnipeSharp.Serialization;
-using SnipeSharp.EndPoint;
-using SnipeSharp.Models.Enumerations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
 using SnipeSharp.Collections;
+using SnipeSharp.EndPoint;
+using SnipeSharp.Models.Enumerations;
+using SnipeSharp.Serialization;
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace SnipeSharp.Models
 {
@@ -387,7 +387,7 @@ namespace SnipeSharp.Models
         /// The date this Asset was purchased.
         /// </summary>
         [DeserializeAs("purchase_date", DeserializeAs.DateObject)]
-        [SerializeAs("purchase_date", SerializeAs.SimpleDate)]
+        [SerializeAs("purchase_date", SerializeAs.SimpleDateOnly)]
         [Patch(nameof(isPurchaseDateModified))]
         public DateTime? PurchaseDate
         {
@@ -485,7 +485,7 @@ namespace SnipeSharp.Models
             get => CustomFields?.IsModified ?? false;
             set
             {
-                if(null != CustomFields)
+                if (null != CustomFields)
                     CustomFields.IsModified = value;
             }
         }
@@ -497,15 +497,15 @@ namespace SnipeSharp.Models
         private void OnSerializing(StreamingContext context)
         {
             _customFields = new Dictionary<string, JToken>();
-            if(null != CustomFields)
-                foreach(var pair in CustomFields)
+            if (null != CustomFields)
+                foreach (var pair in CustomFields)
                     // only serialize modified custom fields
                     // Value cannot be null, because we check that in CustomFieldDictionary
-                    if(pair.Value!.IsModified)
+                    if (pair.Value!.IsModified)
                         _customFields[pair.Value!.Field ?? pair.Key] = pair.Value!.Value;
-            if(null != AssignedTo && isAssignedToModified) // TODO: is it possible to un-assign with this method?
+            if (null != AssignedTo && isAssignedToModified) // TODO: is it possible to un-assign with this method?
             {
-                switch(AssignedTo.Type)
+                switch (AssignedTo.Type)
                 {
                     case AssignedToType.Asset:
                         _customFields["assigned_asset"] = AssignedTo.Id;
@@ -530,11 +530,11 @@ namespace SnipeSharp.Models
         [OnDeserialized]
         private void OnDeserialized(StreamingContext context)
         {
-            if(null != _customFields)
+            if (null != _customFields)
             {
-                foreach(var pair in _customFields)
+                foreach (var pair in _customFields)
                 {
-                    if(!pair.Key.StartsWith("_snipeit_")) // custom fields start with _snipeit_
+                    if (!pair.Key.StartsWith("_snipeit_")) // custom fields start with _snipeit_
                         continue;
                     CustomFields.Add(new AssetCustomField
                     {

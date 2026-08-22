@@ -1,5 +1,5 @@
-using SnipeSharp.Serialization;
 using SnipeSharp.Models.Enumerations;
+using SnipeSharp.Serialization;
 
 namespace SnipeSharp.Models
 {
@@ -18,7 +18,7 @@ namespace SnipeSharp.Models
         /// The Id of the User in Snipe-IT.
         /// </summary>
         [DeserializeAs("id")]
-        public int UserId { get;  private set; }
+        public int UserId { get; private set; }
 
         /// <summary>
         /// The user's username.

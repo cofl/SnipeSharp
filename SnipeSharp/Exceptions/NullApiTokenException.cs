@@ -11,7 +11,7 @@ namespace SnipeSharp.Exceptions
         /// <summary>
         /// Initializes a new instance of the MissingRequiredAttributeException class.
         /// </summary>
-        public NullApiTokenException(): base("No API Token set.")
+        public NullApiTokenException() : base("No API Token set.")
         {
         }
     }

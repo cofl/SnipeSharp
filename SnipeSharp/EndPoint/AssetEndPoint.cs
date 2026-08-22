@@ -1,5 +1,5 @@
-using System;
 using SnipeSharp.Models;
+using System;
 
 namespace SnipeSharp.EndPoint
 {
@@ -10,7 +10,7 @@ namespace SnipeSharp.EndPoint
     {
         /// <param name="api">The Api to grab the RequestManager from.</param>
         /// <exception cref="SnipeSharp.Exceptions.MissingRequiredAttributeException">When the type parameter does not have the <see cref="PathSegmentAttribute">PathSegmentAttribute</see> attribute.</exception>
-        internal AssetEndPoint(SnipeItApi api) : base(api) {}
+        internal AssetEndPoint(SnipeItApi api) : base(api) { }
 
         /// <summary>
         /// Check out an asset.
@@ -27,7 +27,8 @@ namespace SnipeSharp.EndPoint
         /// <param name="note">An optional message for the check-in log.</param>
         /// <returns></returns>
         public RequestResponse<ApiObject> CheckIn(Asset asset, string note = null)
-            => CheckIn(new AssetCheckInRequest(asset){
+            => CheckIn(new AssetCheckInRequest(asset)
+            {
                 Note = note
             });
 

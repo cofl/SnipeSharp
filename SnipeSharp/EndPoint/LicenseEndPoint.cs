@@ -1,6 +1,6 @@
-using System;
 using SnipeSharp.Filters;
 using SnipeSharp.Models;
+using System;
 
 namespace SnipeSharp.EndPoint
 {
@@ -11,7 +11,7 @@ namespace SnipeSharp.EndPoint
     {
         /// <param name="api">The Api to grab the RequestManager from.</param>
         /// <exception cref="SnipeSharp.Exceptions.MissingRequiredAttributeException">When the type parameter does not have the <see cref="PathSegmentAttribute">PathSegmentAttribute</see> attribute.</exception>
-        internal LicenseEndPoint(SnipeItApi api) : base(api) {}
+        internal LicenseEndPoint(SnipeItApi api) : base(api) { }
 
         /// <summary>
         /// Get details for the license seats of a license.
@@ -23,7 +23,7 @@ namespace SnipeSharp.EndPoint
         /// <exception cref="SnipeSharp.Exceptions.ApiErrorException">If there was an error accessing the API, or the license does not exist.</exception>
         public ResponseCollection<LicenseSeat> GetSeats(License license, LicenseSeatSearchFilter filter = null)
         {
-            if(null == license)
+            if (null == license)
                 throw new ArgumentNullException(paramName: nameof(license));
             return Api.RequestManager.GetAll<LicenseSeat>($"{EndPointInfo.BaseUri}/{license.Id}/seats", filter).RethrowExceptionIfAny().Value;
         }

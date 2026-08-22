@@ -1,12 +1,12 @@
-using System;
 using SnipeSharp.Serialization;
+using System;
 
 namespace SnipeSharp.Models
 {
     /// <summary>
     /// AbstractBaseModel is an ApiObject associated with an Api EndPoint.
     /// </summary>
-    public abstract class AbstractBaseModel: ApiObject, IObjectWithId
+    public abstract class AbstractBaseModel : ApiObject, IObjectWithId
     {
         /// <value>The internal Id of the object.</value>
         [DeserializeAs("id")]

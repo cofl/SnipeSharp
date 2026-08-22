@@ -7,7 +7,7 @@ namespace SnipeSharp.Models
     /// Represents a stub object of a certain type, with only the Id and Name filled by the API.
     /// </summary>
     public class Stub<T> : ApiObject, IObjectWithId
-        where T: AbstractBaseModel, new()
+        where T : AbstractBaseModel, new()
     {
         /// <summary>The Id of the object.</summary>
         [DeserializeAs("id")]

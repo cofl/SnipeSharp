@@ -1,7 +1,7 @@
-using System;
 using SnipeSharp.EndPoint;
-using SnipeSharp.Serialization;
 using SnipeSharp.Models.Enumerations;
+using SnipeSharp.Serialization;
+using System;
 using System.Runtime.Serialization;
 
 namespace SnipeSharp.Models
@@ -197,7 +197,7 @@ namespace SnipeSharp.Models
         /// The date this Accessory was purchased.
         /// </summary>
         [DeserializeAs("purchase_date", DeserializeAs.DateObject)]
-        [SerializeAs("purchase_date", SerializeAs.SimpleDate)]
+        [SerializeAs("purchase_date", SerializeAs.SimpleDateOnly)]
         [Patch(nameof(isPurchaseDateModified))]
         public DateTime? PurchaseDate
         {

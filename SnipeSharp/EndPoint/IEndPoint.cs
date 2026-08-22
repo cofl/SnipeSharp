@@ -1,7 +1,7 @@
-using SnipeSharp.Models;
-using SnipeSharp.Filters;
-using SnipeSharp.Serialization;
 using SnipeSharp.Exceptions;
+using SnipeSharp.Filters;
+using SnipeSharp.Models;
+using SnipeSharp.Serialization;
 
 namespace SnipeSharp.EndPoint
 {
@@ -9,7 +9,7 @@ namespace SnipeSharp.EndPoint
     /// A contract all EndPoints must follow.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IEndPoint<T> where T: ApiObject
+    public interface IEndPoint<T> where T : ApiObject
     {
         /// <summary>
         /// Create a new object of the generic type.

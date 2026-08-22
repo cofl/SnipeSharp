@@ -1,5 +1,5 @@
-using System;
 using Newtonsoft.Json;
+using System;
 
 namespace SnipeSharp.Serialization.Converters
 {
@@ -11,7 +11,7 @@ namespace SnipeSharp.Serialization.Converters
 
         public override void WriteJson(JsonWriter writer, bool? value, JsonSerializer serializer)
         {
-            if(null == value)
+            if (null == value)
                 writer.WriteNull();
             else
                 writer.WriteRawValue((bool)value ? "true" : "false");

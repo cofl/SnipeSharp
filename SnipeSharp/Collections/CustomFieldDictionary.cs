@@ -1,7 +1,7 @@
+using SnipeSharp.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using SnipeSharp.Models;
 
 namespace SnipeSharp.Collections
 {
@@ -31,7 +31,7 @@ namespace SnipeSharp.Collections
         public IEnumerable<string> StringValues => GetValues();
         private IEnumerable<string> GetValues()
         {
-            foreach(var value in Values)
+            foreach (var value in Values)
                 yield return value.Value;
         }
 
@@ -40,14 +40,14 @@ namespace SnipeSharp.Collections
         {
             get
             {
-                foreach(var val in Values)
-                    if(val.IsModified)
+                foreach (var val in Values)
+                    if (val.IsModified)
                         return true;
                 return false;
             }
             set
             {
-                foreach(var val in Values)
+                foreach (var val in Values)
                     val.IsModified = value;
             }
         }
@@ -62,7 +62,7 @@ namespace SnipeSharp.Collections
         public int Count => BackingDictionary.Count;
 
         /// <inheritdoc />
-        public bool IsReadOnly => ((IDictionary<string,AssetCustomField>)BackingDictionary).IsReadOnly;
+        public bool IsReadOnly => ((IDictionary<string, AssetCustomField>)BackingDictionary).IsReadOnly;
 
         /// <summary>Get and set custom field values by SnipeIT database column name.</summary>
         /// <param name="key">The database column name</param>
@@ -71,11 +71,11 @@ namespace SnipeSharp.Collections
             get => BackingDictionary[key].Value;
             set
             {
-                if(null == key)
+                if (null == key)
                     throw new ArgumentNullException(paramName: nameof(key));
-                if(null == value)
+                if (null == value)
                     throw new ArgumentNullException(paramName: nameof(value));
-                if(BackingDictionary.TryGetValue(key, out var model))
+                if (BackingDictionary.TryGetValue(key, out var model))
                     model.Value = value;
                 else
                 {
@@ -93,13 +93,13 @@ namespace SnipeSharp.Collections
             get => BackingDictionary[key];
             set
             {
-                if(null == key)
+                if (null == key)
                     throw new ArgumentNullException(paramName: nameof(key));
-                if(null == value)
+                if (null == value)
                     throw new ArgumentNullException(paramName: nameof(value));
-                if(null != value.Field && key != value.Field)
+                if (null != value.Field && key != value.Field)
                     throw new ArgumentException($"Field key \"{value.Field}\" is not null and does not match key \"{key}\"", paramName: nameof(value));
-                if(null == value.Field || null == value.FriendlyName)
+                if (null == value.Field || null == value.FriendlyName)
                 {
                     value = new AssetCustomField
                     {
@@ -110,16 +110,17 @@ namespace SnipeSharp.Collections
                     };
                 }
                 var hasFriendlyName = FriendlyNames.TryGetValue(value.FriendlyName, out var existingKey);
-                if(hasFriendlyName && existingKey != value.Field)
+                if (hasFriendlyName && existingKey != value.Field)
                     throw new ArgumentException($"The dictionary already contains a friendly name \"{value.FriendlyName}\"");
                 value.IsModified = true;
-                if(!BackingDictionary.ContainsKey(key))
+                if (!BackingDictionary.ContainsKey(key))
                 {
                     Add(value);
-                } else
+                }
+                else
                 {
                     // remove the non-matching friendly name for the existing field.
-                    if(!hasFriendlyName)
+                    if (!hasFriendlyName)
                         FriendlyNames.Remove(BackingDictionary[value.Field].FriendlyName);
                     BackingDictionary[value.Field] = value;
                     FriendlyNames[value.FriendlyName] = value.Field;
@@ -133,7 +134,7 @@ namespace SnipeSharp.Collections
         /// <returns>True, if the field is present.</returns>
         public bool TryGetValue(string key, out string value)
         {
-            if(BackingDictionary.TryGetValue(key, out var model))
+            if (BackingDictionary.TryGetValue(key, out var model))
             {
                 value = model.Value;
                 return true;
@@ -159,7 +160,7 @@ namespace SnipeSharp.Collections
         /// <exception cref="ArgumentNullException">If <paramref name="value"/> or its <see cref="AssetCustomField.Field"/> property are null.</exception>
         /// <exception cref="ArgumentException">If the dictionary already contains the value's friendly name and the value is not being updated.</exception>
         public void Add(AssetCustomField value)
-            => ((IDictionary<string, AssetCustomField>) this).Add(value?.Field, value);
+            => ((IDictionary<string, AssetCustomField>)this).Add(value?.Field, value);
 
         /// <inheritdoc />
         void ICollection<KeyValuePair<string, AssetCustomField>>.Add(KeyValuePair<string, AssetCustomField> item)
@@ -169,15 +170,15 @@ namespace SnipeSharp.Collections
         /// <exception cref="ArgumentNullException">If <paramref name="value"/> or its <see cref="AssetCustomField.Field"/> property are null.</exception>
         /// <exception cref="ArgumentNullException">If <paramref name="key"/> is null.</exception>
         /// <exception cref="ArgumentException">If the dictionary already contains the value's friendly name and the value is not being updated.</exception>
-        void IDictionary<string,AssetCustomField>.Add(string key, AssetCustomField value)
+        void IDictionary<string, AssetCustomField>.Add(string key, AssetCustomField value)
         {
-            if(null == value)
+            if (null == value)
                 throw new ArgumentNullException(paramName: nameof(value));
-            if(null == key)
+            if (null == key)
                 throw new ArgumentNullException(paramName: nameof(key));
-            if(null != value.Field && key != value.Field)
+            if (null != value.Field && key != value.Field)
                 throw new ArgumentException($"Field key \"{value.Field}\" is not null and does not match key \"{key}\"", paramName: nameof(value));
-            if(null == value.Field || null == value.FriendlyName)
+            if (null == value.Field || null == value.FriendlyName)
             {
                 value = new AssetCustomField
                 {
@@ -188,9 +189,9 @@ namespace SnipeSharp.Collections
                 };
             }
             value.IsModified = true;
-            if(ContainsKey(value.Field))
+            if (ContainsKey(value.Field))
                 throw new ArgumentException($"The dictionary already contains a key \"{value.Field}\"");
-            if(FriendlyNames.ContainsKey(value.FriendlyName))
+            if (FriendlyNames.ContainsKey(value.FriendlyName))
                 throw new ArgumentException($"The dictionary already contains a friendly name \"{value.FriendlyName}\"");
             BackingDictionary.Add(value.Field, value);
             FriendlyNames.Add(value.FriendlyName, value.Field);
@@ -202,7 +203,7 @@ namespace SnipeSharp.Collections
 
         /// <inheritdoc />
         public bool Contains(KeyValuePair<string, AssetCustomField> item)
-            => ((IDictionary<string,AssetCustomField>)BackingDictionary).Contains(item);
+            => ((IDictionary<string, AssetCustomField>)BackingDictionary).Contains(item);
 
         /// <inheritdoc />
         public void Clear()
@@ -212,7 +213,7 @@ namespace SnipeSharp.Collections
         }
 
         void ICollection<KeyValuePair<string, AssetCustomField>>.CopyTo(KeyValuePair<string, AssetCustomField>[] array, int arrayIndex)
-            => ((IDictionary<string,AssetCustomField>)BackingDictionary).CopyTo(array, arrayIndex);
+            => ((IDictionary<string, AssetCustomField>)BackingDictionary).CopyTo(array, arrayIndex);
 
         /// <summary>It is not possible to remove fields from a CustomFieldDictionary.</summary>
         bool IDictionary<string, AssetCustomField>.Remove(string key)
@@ -231,7 +232,7 @@ namespace SnipeSharp.Collections
             => GetEnumerator();
 
         IEnumerator<KeyValuePair<string, AssetCustomField>> IEnumerable<KeyValuePair<string, AssetCustomField>>.GetEnumerator()
-            => ((IDictionary<string,AssetCustomField>)BackingDictionary).GetEnumerator();
+            => ((IDictionary<string, AssetCustomField>)BackingDictionary).GetEnumerator();
 
         /// <summary>
         /// A dictionary mapping from friendly names to values, wrapping a <see cref="CustomFieldDictionary"/>.
@@ -267,7 +268,7 @@ namespace SnipeSharp.Collections
             /// <inheritdoc />
             public IEnumerator<KeyValuePair<string, string>> GetEnumerator()
             {
-                foreach(var key in Keys)
+                foreach (var key in Keys)
                     yield return new KeyValuePair<string, string>(key, CustomFields[CustomFields.FriendlyNames[key]]);
             }
 
