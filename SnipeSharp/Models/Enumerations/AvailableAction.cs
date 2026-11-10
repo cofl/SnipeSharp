@@ -46,5 +46,17 @@ namespace SnipeSharp.Models.Enumerations
         /// <summary>The associated object may be created.</summary>
         [EnumMember(Value = "create_asset")]
         CreateAsset = 512,
+        /// <summary>The associated object may be viewed.</summary>
+        [EnumMember(Value = "view")]
+        View = 1024,
+        /// <summary>The associated object may be selected for bulk actions.</summary>
+        [EnumMember(Value = "bulk_selectable")]
+        BulkSelectable = 2048,
+        /// <summary>The associated object's quantity may be adjusted.</summary>
+        [EnumMember(Value = "adjust_quantity")]
+        AdjustQuantity = 4096,
+        /// <summary>The associated maintenance may be marked complete.</summary>
+        [EnumMember(Value = "complete")]
+        Complete = 8192,
     }
 }
