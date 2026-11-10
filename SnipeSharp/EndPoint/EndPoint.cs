@@ -108,7 +108,7 @@ namespace SnipeSharp.EndPoint
         => FindAllOptional(filter);
 
         /// <inheritdoc />
-        public T Create(T toCreate)
+        public virtual T Create(T toCreate)
             => Api.RequestManager.Post(EndPointInfo.BaseUri, CheckRequiredFields(toCreate)).RethrowExceptionIfAny().Value.Payload;
 
         /// <inheritdoc />

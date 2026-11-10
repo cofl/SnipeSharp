@@ -175,7 +175,12 @@ namespace SnipeSharp
         /// <value>
         /// Returns an <see cref="SnipeSharp.EndPoint.EndPoint{T}">EndPoint</see> suitable for <see cref="SnipeSharp.Models.Maintenance">Maintenances</see>.
         /// </value>
-        public /* readonly */ EndPoint<Maintenance> Maintenances { get; }
+        public /* readonly */ MaintenanceEndPoint Maintenances { get; }
+
+        /// <value>
+        /// Returns an <see cref="SnipeSharp.EndPoint.EndPoint{T}">EndPoint</see> suitable for <see cref="SnipeSharp.Models.MaintenanceTypeRecord">maintenance types</see> (Snipe-IT v8.8+).
+        /// </value>
+        public /* readonly */ EndPoint<MaintenanceTypeRecord> MaintenanceTypes { get; }
 
         /// <value>
         /// Returns an <see cref="SnipeSharp.EndPoint.EndPoint{T}">EndPoint</see> suitable for <see cref="SnipeSharp.Models.Manufacturer">Manufacturers</see>.
@@ -231,7 +236,8 @@ namespace SnipeSharp
             Groups = new EndPoint<Group>(this);
             Licenses = new LicenseEndPoint(this);
             Locations = new EndPoint<Location>(this);
-            Maintenances = new EndPoint<Maintenance>(this);
+            Maintenances = new MaintenanceEndPoint(this);
+            MaintenanceTypes = new EndPoint<MaintenanceTypeRecord>(this);
             Manufacturers = new EndPoint<Manufacturer>(this);
             Models = new EndPoint<Model>(this);
             StatusLabels = new StatusLabelEndPoint(this);
@@ -255,6 +261,7 @@ namespace SnipeSharp
                 {typeof(License), Licenses},
                 {typeof(Location), Locations},
                 {typeof(Maintenance), Maintenances},
+                {typeof(MaintenanceTypeRecord), MaintenanceTypes},
                 {typeof(Manufacturer), Manufacturers},
                 {typeof(Model), Models},
                 {typeof(StatusLabel), StatusLabels},
