@@ -73,7 +73,7 @@ namespace SnipeSharp.Models
         public bool? ShouldShowInNav { get; private set; }
 
         /// <value>Whether or not this label is a default label.</value>
-        [DeserializeAs("default_lable")]
+        [DeserializeAs("default_label")]
         public bool? IsDefaultLabel { get; private set; }
 
         /// <value>The number of assets with this label.</value>

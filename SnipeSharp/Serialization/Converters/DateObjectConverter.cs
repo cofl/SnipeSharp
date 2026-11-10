@@ -25,7 +25,8 @@ namespace SnipeSharp.Serialization.Converters
             {
                 return null;
             }
-            else if (serializer.Deserialize<DateObjectResponse>(reader) is DateObjectResponse response && DateTime.TryParse(response.DateTime, out var datetime))
+            else if (serializer.Deserialize<DateObjectResponse>(reader) is DateObjectResponse response
+                     && DateTime.TryParse(response.DateTime ?? response.Date, out var datetime))
                 return datetime;
             return null;
         }
@@ -33,9 +34,13 @@ namespace SnipeSharp.Serialization.Converters
         public override void WriteJson(JsonWriter writer, DateTime? value, JsonSerializer serializer)
             => throw new NotImplementedException();
 
+        // Snipe-IT sends date fields as { date, formatted } and datetime fields as { datetime, formatted }.
         private sealed class DateObjectResponse
         {
             [DeserializeAs("date")]
+            public string Date { get; set; }
+
+            [DeserializeAs("datetime")]
             public string DateTime { get; set; }
         }
     }
